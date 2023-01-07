@@ -15,7 +15,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+## Rotas de acesso restrito
 Route::post("/produtos/cadastro",[ProdutosController::class, "criarProduto"])->name('criar.produto');
+Route::put("/produtos/atualizacao/{id}",[ProdutosController::class, "atualizarProduto"])->name('atualizar.produto');
+
+## Rotas livres
 Route::get("/produtos/id/{id}",[ProdutosController::class, "buscarProdutoId"])->name('busca.id');
 Route::get("/produtos/sku/{sku}",[ProdutosController::class, "buscarProdutoSku"])->name('busca.sku');
 Route::get("/produtos/nome/{nome}", [ProdutosController::class, "buscarProdutoNome"])->name('buscar.nome');
+
