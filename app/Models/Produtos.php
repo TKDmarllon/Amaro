@@ -8,6 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Produtos extends Model
 {
     use HasFactory;
-    protected $table='produtos';
-    protected $fillable=['nome','sku','valor','cor'];
+     protected $table='produtos';
+     protected $fillable=['nome','valor','cor','sku','genero'];
+
+public function Tamanhos()
+{
+    return $this->hasMany(Tamanhos::class,'produtos_id');
+}
 }
