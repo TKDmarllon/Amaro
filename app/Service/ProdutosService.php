@@ -12,7 +12,8 @@ class ProdutosService {
     protected $produtosRepository;
     
 
-    public function __construct(ProdutosRepository $produtosRepository){
+    public function __construct(ProdutosRepository $produtosRepository)
+    {
         $this->produtosRepository = $produtosRepository;
     }
 
@@ -34,6 +35,11 @@ class ProdutosService {
     public function enviaConsultaNome($nome):Collection
     {
         return $this->produtosRepository->consultaNome($nome);
+    }
+
+    public function enviaConsultaEstoque($id)
+    {
+        return $this->produtosRepository->consultaEstoque($id);
     }
 
     public function enviarAtualizacao($atualizacao, $id)

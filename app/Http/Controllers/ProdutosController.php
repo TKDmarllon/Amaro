@@ -13,9 +13,8 @@ class ProdutosController extends Controller
 {
     private $produtosService;
 
-    public function __construct(
-        ProdutosService $produtosService,
-    ){
+    public function __construct(ProdutosService $produtosService,)
+    {
         $this->produtosService = $produtosService;
     }
 
@@ -54,5 +53,10 @@ class ProdutosController extends Controller
         } catch(produtosException $e){
                 return new JsonResponse($e->getMessage(),$e->getCode());
         }
+    }
+
+    public function buscarTamanhoProduto($id)
+    {
+        return $this->produtosService->enviaConsultaEstoque($id);
     }
 }

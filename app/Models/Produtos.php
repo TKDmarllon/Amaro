@@ -11,8 +11,8 @@ class Produtos extends Model
      protected $table='produtos';
      protected $fillable=['nome','valor','cor','sku','genero'];
 
-public function Tamanhos()
+public function Estoque()
 {
-    return $this->hasMany(Tamanhos::class,'produtos_id');
+    return $this->hasMany(Estoque::class,'produtos_id');
 }
 }
