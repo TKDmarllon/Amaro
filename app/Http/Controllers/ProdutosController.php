@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Exceptions\produtosException;
+use App\Http\Requests\ProdutosRequest;
 use App\Models\Produtos;
 use App\Service\ProdutosService;
 use Illuminate\Database\Eloquent\Collection;
@@ -19,7 +20,7 @@ class ProdutosController extends Controller
         $this->produtosService = $produtosService;
     }
 
-    public function criarProduto(Request $request):JsonResponse
+    public function criarProduto(ProdutosRequest $request):JsonResponse
     {
         try {
             $protudo = new Produtos($request->all());

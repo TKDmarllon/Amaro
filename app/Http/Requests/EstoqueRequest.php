@@ -3,9 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 
-class AtualizacaoValidation extends FormRequest
+class EstoqueRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -14,7 +13,7 @@ class AtualizacaoValidation extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        return false;
     }
 
     /**
@@ -25,14 +24,7 @@ class AtualizacaoValidation extends FormRequest
     public function rules()
     {
         return [
-            'nome'=>'required',
-            'sku'=>'required',
-            'valor'=>'required',
-            'cor'=>'required',
-            'estoque'=>'required|gt:0',
-            'tamanho'=>'required',
-            'genero'=>['required',
-                    Rule::in('m','f','i')]
+            //
         ];
     }
 }

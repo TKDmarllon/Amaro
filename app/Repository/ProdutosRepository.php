@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Models\Produtos;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Facades\DB;
 
 class ProdutosRepository 
 {
@@ -35,5 +36,10 @@ class ProdutosRepository
     public function deletarId($id):void
     {
         Produtos::destroy($id);
+    }
+
+    public function verificaSku(String $numero)
+    {
+        return DB::table('produtos')->where('sku', $numero)->exists();
     }
     }
