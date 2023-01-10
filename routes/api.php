@@ -2,7 +2,6 @@
 
 use App\Http\Controllers\EstoqueController;
 use App\Http\Controllers\ProdutosController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,7 +16,10 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::controller(ProdutosController::class)->group(function()
-{
+{    
+    Route::post("/produtos/cadastro","criarProduto")
+    ->name('criar.produto');
+
     Route::get("/produtos/id/{id}","buscarProdutoId")
     ->name('buscar.produtoId');
 
@@ -27,24 +29,25 @@ Route::controller(ProdutosController::class)->group(function()
     Route::get("/produtos/nome/{nome}","buscarProdutoNome")
     ->name('buscar.nome');
 
-    Route::post("/produtos/cadastro","criarProduto")
-    ->name('criar.produto');
-
     Route::put("/produtos/atualizacao/{id}","atualizarProduto")
     ->name('atualizar.produto');
+
+    Route::delete("/produtos/id/{id}","deletarProduto")
+    ->name('deletar.produto');
+
 });
 
 Route::controller(EstoqueController::class)->group(function()
-{
+{   
+     Route::post("/estoque/cadastro","criarEstoque")
+    ->name('criar.estoque');
+
     Route::get("/estoque/id/{id}","consultarEstoque")
     ->name('buscar.estoqueId');
 
+    Route::put("/estoque/atualizar/{id}","atualizarEstoque")
+    ->name('atualizar.estoque');
+
     Route::delete("/estoque/id/{id}","deletarEstoque")
     ->name('deletar.estoque');
-
-    Route::post("/estoque/cadastro","criarEstoque")
-    ->name('criar.estoque');
-
-    Route::put("/estoque/atualizar","atualizarEstoque")
-    ->name('atualizar.estoque');
 });

@@ -9,7 +9,7 @@ class Estoque extends Model
 {
     use HasFactory;
     protected $table='estoque';
-    protected $fillable=['estoque','produtos_id'];
+    protected $fillable=['pp','p','m','g','gg','produtos_id'];
 
     public function Produtos(){
     return $this->belongsTo(Produtos::class);

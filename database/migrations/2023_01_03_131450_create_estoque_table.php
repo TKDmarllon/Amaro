@@ -15,12 +15,13 @@ return new class extends Migration
     {
         Schema::create('estoque', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('produtos_id')->constrained();
+            $table->foreignId('produtos_id')->unique()->constrained()->onDelete('cascade');
             $table->string('pp');
             $table->string('p');
             $table->string('m');
             $table->string('g');
             $table->string('gg');
+            $table->timestamps();
         });
     }
 

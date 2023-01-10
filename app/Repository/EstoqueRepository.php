@@ -3,26 +3,28 @@
 namespace App\Repository;
 
 use App\Models\Estoque;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 
 class EstoqueRepository
 {
-    public function inserirEstoque(Estoque $estoque)
+    public function inserirEstoque(Estoque $estoque):Estoque
     {
-        Estoque::created($estoque);
+        return Estoque::create($estoque->getAttributes());
     }
 
-    public function consultarEstoque($id)
+    public function consultarEstoque($id):Collection
     {
-        return Estoque::findorfail($id);
+        return Estoque::where('produtos_id',$id)->get();
     }
 
-    public function salvarAtualizado(Estoque $dadosNovoEstoque)
+    public function salvarAtualizado($atualizarEstoque)
     {
-        return $this->
+        Estoque::saved($atualizarEstoque);
     }
 
-    public function FunctionName(Type $var = null)
+    public function destruirEstoque($id)
     {
-        # code...
+        Estoque::findorfail($id)->delete();
     }
 }
