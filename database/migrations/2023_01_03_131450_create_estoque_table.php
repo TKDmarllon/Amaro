@@ -13,14 +13,15 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('tamanhos', function (Blueprint $table) {
+        Schema::create('estoque', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('produtos_id')->constrained();
+            $table->foreignId('produtos_id')->unique()->constrained()->onDelete('cascade');
             $table->string('pp');
             $table->string('p');
             $table->string('m');
             $table->string('g');
             $table->string('gg');
+            $table->timestamps();
         });
     }
 
@@ -31,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tamanhos');
+        Schema::dropIfExists('estoque');
     }
 };
