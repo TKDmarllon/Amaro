@@ -3,11 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Exceptions\produtosException;
+use App\Http\Requests\AtualizacaoProdutosRequest;
+use App\Http\Requests\ProdutosRequest;
 use App\Models\Produtos;
 use App\Service\ProdutosService;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
 class ProdutosController extends Controller
@@ -19,12 +20,12 @@ class ProdutosController extends Controller
         $this->produtosService = $produtosService;
     }
 
-    public function criarProduto(Request $request):JsonResponse
+    public function criarProduto(ProdutosRequest $request):JsonResponse
     {
         try {
             $protudo = new Produtos($request->all());
             $criado = $this->produtosService->enviaRepository($protudo);
-                return new JsonResponse("Produto $criado->nome criado com id $criado->id",
+                return new JsonResponse("Produto $criado->nome criado com sku $criado->sku",
                                          Response::HTTP_CREATED);
         } catch(produtosException $e){
                 return new JsonResponse($e->getMessage(),$e->getCode());
@@ -46,7 +47,7 @@ class ProdutosController extends Controller
         return $this->produtosService->enviaConsultaNome($nome);
     }
 
-    public function atualizarProduto(Request $request,$id):JsonResponse
+    public function atualizarProduto(AtualizacaoProdutosRequest $request,$id):JsonResponse
     {
         try {
             $atualizacao=new Produtos($request->all());

@@ -17,8 +17,23 @@ class ProdutosService
         $this->produtosRepository = $produtosRepository;
     }
 
-    public function enviaRepository(Produtos $produto):Produtos
+    public function gerarSku()
     {
+        $numero=rand(10000,99999);
+        $numero=str_pad($numero,7,0,STR_PAD_LEFT);
+        $numeroExiste=$this->produtosRepository->verificaSku($numero);
+
+        if ($numeroExiste) {
+            return $this->gerarSku();
+        }
+        return $numero;
+    }
+
+    public function enviaRepository($produto):Produtos
+    {
+        $numeroSku=$this->gerarSku();
+        $produto->sku=$numeroSku;
+
         return $this->produtosRepository->salvaProduto($produto);
     }
 

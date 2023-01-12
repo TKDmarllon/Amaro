@@ -3,11 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Exceptions\estoqueException;
+use App\Http\Requests\EstoqueRequest;
 use App\Models\Estoque;
 use App\Service\EstoqueService;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
 class EstoqueController extends Controller
@@ -19,7 +19,7 @@ class EstoqueController extends Controller
         $this->estoqueService = $estoqueService;
     }
 
-    public function criarEstoque(Request $request)
+    public function criarEstoque(EstoqueRequest $request)
     {
         try{
             $estoque = new Estoque($request->all());
@@ -35,7 +35,7 @@ class EstoqueController extends Controller
         return $this->estoqueService->enviaconsulta($id);
     }
 
-    public function AtualizarEstoque(Request $request, $id)
+    public function AtualizarEstoque(EstoqueRequest $request, $id)
     {
         try{
             $estoqueNovo = new Estoque($request->all());
