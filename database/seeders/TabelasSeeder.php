@@ -16,7 +16,7 @@ class TabelasSeeder extends Seeder
     public function run()
     {
         DB::table('produtos')->insert([
-            "nome"=>"blusa",
+            "nome"=>"TESTE blusa",
             "valor"=>'59',
             "sku"=>'0087265',
 	        "cor"=>"preta",
@@ -33,7 +33,7 @@ class TabelasSeeder extends Seeder
         ]);
 
         DB::table('produtos')->insert([
-            "nome"=>"croped",
+            "nome"=>"TESTE croped",
             "valor"=>'49',
             "sku"=>'0968796',
 	        "cor"=>"verde",
@@ -51,7 +51,7 @@ class TabelasSeeder extends Seeder
 
 
         DB::table('produtos')->insert([
-            "nome"=>"camiseta",
+            "nome"=>"TESTE camiseta",
             "valor"=>'69',
             "sku"=>'0075371',
 	        "cor"=>"branco",
@@ -68,7 +68,7 @@ class TabelasSeeder extends Seeder
         ]);
 
             DB::table('produtos')->insert([
-            "nome"=>"casaco",
+            "nome"=>"TESTE casaco",
             "valor"=>'200',
             "sku"=>'0086830',
 	        "cor"=>"azul",
