@@ -30,7 +30,7 @@ class EstoqueController extends Controller
         }
     }
 
-    public function consultarEstoque($id):Collection
+    public function consultarEstoque($id):JsonResponse
     {
         return $this->estoqueService->enviaconsulta($id);
     }
