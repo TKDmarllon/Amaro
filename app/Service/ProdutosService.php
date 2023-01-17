@@ -37,24 +37,36 @@ class ProdutosService
         return $this->produtosRepository->salvaProduto($produto);
     }
 
-    public function enviaConsultaId($id)
+    public function enviaConsultaId($id):Produtos
     {
-        return $this->produtosRepository->consultaId($id);
+        return $produto=$this->produtosRepository->consultaId($id);
     }
 
-    public function enviaConsultaSku($sku):Collection
+    public function enviaConsultaSku($sku):JsonResponse
     {
-        return $this->produtosRepository->consultaSku($sku);
+        $skuBuscado=$this->produtosRepository->consultaSku($sku);
+        if ($skuBuscado->isEmpty()){
+            return new JsonResponse($skuBuscado,Response::HTTP_NOT_FOUND);
+        };
+        return new JsonResponse($skuBuscado,Response::HTTP_OK);
     }
     
-    public function enviaConsultaNome($nome):Collection
+    public function enviaConsultaNome($nome):JsonResponse
     {
-        return $this->produtosRepository->consultaNome($nome);
+        $nomeBuscado = $this->produtosRepository->consultaNome($nome);
+        if ($nomeBuscado->isEmpty()) {
+            return new JsonResponse($nomeBuscado,Response::HTTP_NOT_FOUND);
+        }
+        return new JsonResponse($nomeBuscado,Response::HTTP_OK);
     }
 
-    public function enviarAtualizacao($atualizacao, $id):void
+    public function enviarAtualizacao($atualizacao, $id):JsonResponse
     {
         $produto = $this->produtosRepository->ConsultaId($id);
+
+        if (is_null($produto)) {
+        return new JsonResponse("Produto não encontrado.",Response::HTTP_NOT_FOUND);
+        }
         $produto->update([
                 'nome'=>$atualizacao->nome,
                 'valor'=>$atualizacao->valor, 
@@ -63,9 +75,10 @@ class ProdutosService
                 ]);
 
         $this->produtosRepository->salvarAtualizacao($produto);
+        return new JsonResponse("Produto atualizado.",Response::HTTP_ACCEPTED);
     }
     
-    public function enviarExclusao($id)
+    public function enviarExclusao($id):JsonResponse
     {
         $exclusao=$this->produtosRepository->consultaId($id);
 
@@ -73,6 +86,6 @@ class ProdutosService
             return new JsonResponse("Produto não encontrado.",Response::HTTP_NOT_FOUND);
         }
             $this->produtosRepository->deletarId($id);
-            return new JsonResponse("produto excluído.",Response::HTTP_OK);
+            return new JsonResponse("Produto excluído.",Response::HTTP_OK);
     }
 }

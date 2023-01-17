@@ -13,9 +13,9 @@ class ProdutosRepository
         return Produtos::create($produto->getAttributes());
     }
 
-    public function consultaId($id):Produtos
+    public function consultaId($id):Produtos|null
     {
-        return Produtos::find($id); 
+        return Produtos::findOrFail($id); 
     }
 
     public function consultaSku($sku):Collection

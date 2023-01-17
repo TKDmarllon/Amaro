@@ -23,15 +23,6 @@ class TabelasSeeder extends Seeder
             "genero"=>"m",
         ]);
 
-            DB::table('estoque')->insert([
-            "produtos_id"=>'1',
-            "p"=>'4',
-            "pp"=>'5',
-	        "m"=>'6',
-            "g"=>'5',
-            "gg"=>'4'
-        ]);
-
         DB::table('produtos')->insert([
             "nome"=>"TESTE croped",
             "valor"=>'49',
