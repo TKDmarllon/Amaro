@@ -23,9 +23,13 @@ class EstoqueService
         return $this->estoqueRepository->inserirEstoque($estoque);
     }
 
-    public function enviaConsulta($id):Collection
+    public function enviaConsulta($id):JsonResponse
     {
-        return $this->estoqueRepository->consultarEstoque($id);
+        $estoque=$this->estoqueRepository->consultarEstoque($id);
+        if ($estoque->isEmpty()) {
+            return new JsonResponse($estoque,Response::HTTP_NOT_FOUND);
+        }
+        return new JsonResponse($estoque,Response::HTTP_OK);
     }
 
     public function atualizarEstoque(Estoque $estoqueNovo,$id)
@@ -47,7 +51,7 @@ class EstoqueService
     public function deletarEstoque($id):JsonResponse
     {
         $exclusao=$this->estoqueRepository->consultarEstoque($id);
-        if (is_null($exclusao)) {
+        if ($exclusao->isEmpty()) {
             return new JsonResponse("Estoque não encontrado.",Response::HTTP_NOT_FOUND);
         }
             $this->estoqueRepository->destruirEstoque($id);
