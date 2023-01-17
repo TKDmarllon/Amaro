@@ -32,17 +32,17 @@ class ProdutosController extends Controller
         }
     }
     
-    public function buscarProdutoId($id)
+    public function buscarProdutoId($id):Produtos
     {
         return $this->produtosService->enviaConsultaId($id);
     }
 
-    public function buscarProdutoSku($sku):Collection
+    public function buscarProdutoSku($sku):JsonResponse
     {
         return $this->produtosService->enviaConsultaSku($sku);
     }
 
-    public function buscarProdutoNome($nome):Collection
+    public function buscarProdutoNome($nome):JsonResponse
     {
         return $this->produtosService->enviaConsultaNome($nome);
     }
@@ -51,14 +51,13 @@ class ProdutosController extends Controller
     {
         try {
             $atualizacao=new Produtos($request->all());
-            $this->produtosService->enviarAtualizacao($atualizacao,$id);
-                return new JsonResponse("Atualização realizada", Response::HTTP_OK);
+            return $this->produtosService->enviarAtualizacao($atualizacao,$id);
         } catch(produtosException $e){
-                return new JsonResponse($e->getMessage(),$e->getCode());
+            return new JsonResponse($e->getMessage(),$e->getCode());
         }
     }
 
-    public function deletarProduto($id)
+    public function deletarProduto($id):JsonResponse
     {
         return $this->produtosService->EnviarExclusao($id);
     }
