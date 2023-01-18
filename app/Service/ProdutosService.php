@@ -2,17 +2,18 @@
 
 namespace App\Service;
 
+use App\Mail\NovoProduto;
 use App\Models\Produtos;
 use App\Repository\ProdutosRepository;
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Mail;
 
 class ProdutosService 
 {
     protected $produtosRepository;
     
-    public function __construct(ProdutosRepository $produtosRepository)
+    public function __construct(ProdutosRepository $produtosRepository,)
     {
         $this->produtosRepository = $produtosRepository;
     }
@@ -34,7 +35,11 @@ class ProdutosService
         $numeroSku=$this->gerarSku();
         $produto->sku=$numeroSku;
 
-        return $this->produtosRepository->salvaProduto($produto);
+        $produtoCriado=$this->produtosRepository->salvaProduto($produto);
+
+        $mail=new NovoProduto($produtoCriado->nome,$produtoCriado->valor,$produtoCriado->cor,$produtoCriado->id);
+        Mail::to('teste1@teste.com.br')->send($mail);
+        return $produtoCriado;
     }
 
     public function enviaConsultaId($id):Produtos
