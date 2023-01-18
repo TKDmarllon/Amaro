@@ -36,7 +36,7 @@ class NovoProduto extends Mailable
     public function envelope()
     {
         return new Envelope(
-            subject: 'Novo Produto Email',
+            subject: 'Confira nosso lançamento!',
         );
     }
 
