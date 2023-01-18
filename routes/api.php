@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\EstoqueController;
 use App\Http\Controllers\ProdutosController;
+use App\Mail\NovoProduto;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -50,4 +51,8 @@ Route::controller(EstoqueController::class)->group(function()
 
     Route::delete("/estoque/id/{id}","deletarEstoque")
     ->name('deletar.estoque');
+});
+
+Route::get('/email', function(){
+    return new NovoProduto('casaco',100,'preto',2);
 });
