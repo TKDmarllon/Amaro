@@ -37,8 +37,9 @@ class ProdutosService
 
         $produtoCriado=$this->produtosRepository->salvaProduto($produto);
 
-        $mail=new NovoProduto($produtoCriado->nome,$produtoCriado->valor,$produtoCriado->cor,$produtoCriado->id);
-        Mail::to('teste1@teste.com.br')->send($mail);
+        $email=new NovoProduto($produtoCriado->nome,$produtoCriado->valor,$produtoCriado->cor,$produtoCriado->id);
+        Mail::to('teste1@teste.com.br')->queue($email);
+
         return $produtoCriado;
     }
 
