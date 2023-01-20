@@ -2,6 +2,8 @@
 
 namespace App\Service;
 
+use App\Events\ProdutoCriado;
+use App\Listeners\ProdutoCriadoEvent;
 use App\Mail\NovoProduto;
 use App\Models\Produtos;
 use App\Repository\ProdutosRepository;
@@ -34,12 +36,8 @@ class ProdutosService
     {
         $numeroSku=$this->gerarSku();
         $produto->sku=$numeroSku;
-
         $produtoCriado=$this->produtosRepository->salvaProduto($produto);
-
-        $email=new NovoProduto($produtoCriado->nome,$produtoCriado->valor,$produtoCriado->cor,$produtoCriado->id);
-        Mail::to('teste1@teste.com.br')->queue($email);
-
+        ProdutoCriado::dispatch($produtoCriado);
         return $produtoCriado;
     }
 

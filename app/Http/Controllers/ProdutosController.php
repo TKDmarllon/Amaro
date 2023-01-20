@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\ProdutoCriado;
 use App\Exceptions\produtosException;
 use App\Http\Requests\AtualizacaoProdutosRequest;
 use App\Http\Requests\ProdutosRequest;
