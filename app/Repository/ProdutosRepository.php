@@ -13,27 +13,27 @@ class ProdutosRepository
         return Produtos::create($produto->getAttributes());
     }
 
-    public function consultaId($id):Produtos|null
+    public function consultaId(int $id):Produtos|null
     {
         return Produtos::findOrFail($id); 
     }
 
-    public function consultaSku($sku):Collection
+    public function consultaSku(int $sku):Collection
     {
         return Produtos::where('sku',$sku)->get();
     }
 
-    public function consultaNome($nome):Collection
+    public function consultaNome(string $nome):Collection
     {
         return Produtos::where('nome',$nome)->get();
     }
 
-    public function salvarAtualizacao($produto):void
+    public function salvarAtualizacao(mixed $produto):void
     {
         Produtos::saved($produto['id']);
     }
 
-    public function deletarId($id):void
+    public function deletarId(int $id):void
     {
         Produtos::destroy($id);
     }

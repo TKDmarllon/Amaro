@@ -41,7 +41,7 @@ class ProdutosRequest extends AbstractRequest
             'valor.numeric'=>"Digite apenas números no campo 'valor'",
             'valor.gt'=>'O valor precisa ser positivo',
             'cor.required'=>"Preencha o campo 'cor'",
-            'genero'=>"O campo genero deve ser preenchido com 'f' ou 'm'",
+            'genero'=>"O campo genero deve ser preenchido com 'f' ou 'm'"
         ];
     }
 }

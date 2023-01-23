@@ -3,22 +3,15 @@
 namespace App\Service;
 
 use App\Events\ProdutoCriado;
-use App\Listeners\ProdutoCriadoEvent;
-use App\Mail\NovoProduto;
 use App\Models\Produtos;
 use App\Repository\ProdutosRepository;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
-use Illuminate\Support\Facades\Mail;
 
 class ProdutosService 
-{
-    protected $produtosRepository;
-    
-    public function __construct(ProdutosRepository $produtosRepository,)
-    {
-        $this->produtosRepository = $produtosRepository;
-    }
+{    
+    public function __construct(protected ProdutosRepository $produtosRepository,)
+    {}
 
     public function gerarSku()
     {
@@ -32,21 +25,20 @@ class ProdutosService
         return $numero;
     }
 
-    public function enviaRepository($produto):Produtos
+    public function enviaRepository(Produtos $produto):Produtos
     {
-        $numeroSku=$this->gerarSku();
-        $produto->sku=$numeroSku;
+        $produto->sku=$this->gerarSku();
         $produtoCriado=$this->produtosRepository->salvaProduto($produto);
         ProdutoCriado::dispatch($produtoCriado);
         return $produtoCriado;
     }
 
-    public function enviaConsultaId($id):Produtos
+    public function enviaConsultaId(int $id):Produtos
     {
-        return $produto=$this->produtosRepository->consultaId($id);
+        return $this->produtosRepository->consultaId($id);
     }
 
-    public function enviaConsultaSku($sku):JsonResponse
+    public function enviaConsultaSku(int $sku):JsonResponse
     {
         $skuBuscado=$this->produtosRepository->consultaSku($sku);
         if ($skuBuscado->isEmpty()){
@@ -55,7 +47,7 @@ class ProdutosService
         return new JsonResponse($skuBuscado,Response::HTTP_OK);
     }
     
-    public function enviaConsultaNome($nome):JsonResponse
+    public function enviaConsultaNome(string $nome):JsonResponse
     {
         $nomeBuscado = $this->produtosRepository->consultaNome($nome);
         if ($nomeBuscado->isEmpty()) {
@@ -64,7 +56,7 @@ class ProdutosService
         return new JsonResponse($nomeBuscado,Response::HTTP_OK);
     }
 
-    public function enviarAtualizacao($atualizacao, $id):JsonResponse
+    public function enviarAtualizacao(mixed $atualizacao,int $id):JsonResponse
     {
         $produto = $this->produtosRepository->ConsultaId($id);
 
@@ -82,7 +74,7 @@ class ProdutosService
         return new JsonResponse("Produto atualizado.",Response::HTTP_ACCEPTED);
     }
     
-    public function enviarExclusao($id):JsonResponse
+    public function enviarExclusao(int $id):JsonResponse
     {
         $exclusao=$this->produtosRepository->consultaId($id);
 

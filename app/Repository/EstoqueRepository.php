@@ -3,7 +3,6 @@
 namespace App\Repository;
 
 use App\Models\Estoque;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 
 class EstoqueRepository
@@ -13,17 +12,17 @@ class EstoqueRepository
         return Estoque::create($estoque->getAttributes());
     }
 
-    public function consultarEstoque($id):Collection
+    public function consultarEstoque(int $id):Collection
     {
         return Estoque::where('produtos_id',$id)->get();
     }
 
-    public function salvarAtualizado($atualizarEstoque)
+    public function salvarAtualizado(mixed $atualizarEstoque)
     {
         Estoque::saved($atualizarEstoque);
     }
 
-    public function destruirEstoque($id)
+    public function destruirEstoque(int $id)
     {
         Estoque::findorfail($id)->delete();
     }

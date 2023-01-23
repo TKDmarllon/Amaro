@@ -6,18 +6,13 @@ use App\Exceptions\estoqueException;
 use App\Http\Requests\EstoqueRequest;
 use App\Models\Estoque;
 use App\Service\EstoqueService;
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
 
 class EstoqueController extends Controller
 {
-    protected $estoqueService;
-
-    public function __construct(EstoqueService $estoqueService)
-    {
-        $this->estoqueService = $estoqueService;
-    }
+    public function __construct(protected EstoqueService $estoqueService)
+    {}
 
     public function criarEstoque(EstoqueRequest $request)
     {
@@ -30,7 +25,7 @@ class EstoqueController extends Controller
         }
     }
 
-    public function consultarEstoque($id):JsonResponse
+    public function consultarEstoque(int $id):JsonResponse
     {
         return $this->estoqueService->enviaconsulta($id);
     }
@@ -46,7 +41,7 @@ class EstoqueController extends Controller
         }
     }
 
-    public function deletarEstoque($id)
+    public function deletarEstoque(int $id)
     {
         return $this->estoqueService->deletarEstoque($id);
     }
