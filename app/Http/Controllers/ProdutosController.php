@@ -2,24 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Events\ProdutoCriado;
 use App\Exceptions\produtosException;
 use App\Http\Requests\AtualizacaoProdutosRequest;
 use App\Http\Requests\ProdutosRequest;
 use App\Models\Produtos;
 use App\Service\ProdutosService;
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
 
 class ProdutosController extends Controller
 {
-    private $produtosService;
-
-    public function __construct(ProdutosService $produtosService,)
-    {
-        $this->produtosService = $produtosService;
-    }
+    public function __construct(private ProdutosService $produtosService,)
+    {}
 
     public function criarProduto(ProdutosRequest $request):JsonResponse
     {
@@ -33,22 +27,22 @@ class ProdutosController extends Controller
         }
     }
     
-    public function buscarProdutoId($id):Produtos
+    public function buscarProdutoId(int $id):Produtos
     {
         return $this->produtosService->enviaConsultaId($id);
     }
 
-    public function buscarProdutoSku($sku):JsonResponse
+    public function buscarProdutoSku(int $sku):JsonResponse
     {
         return $this->produtosService->enviaConsultaSku($sku);
     }
 
-    public function buscarProdutoNome($nome):JsonResponse
+    public function buscarProdutoNome(string $nome):JsonResponse
     {
         return $this->produtosService->enviaConsultaNome($nome);
     }
 
-    public function atualizarProduto(AtualizacaoProdutosRequest $request,$id):JsonResponse
+    public function atualizarProduto(AtualizacaoProdutosRequest $request,int $id):JsonResponse
     {
         try {
             $atualizacao=new Produtos($request->all());
@@ -58,7 +52,7 @@ class ProdutosController extends Controller
         }
     }
 
-    public function deletarProduto($id):JsonResponse
+    public function deletarProduto(int $id):JsonResponse
     {
         return $this->produtosService->EnviarExclusao($id);
     }
