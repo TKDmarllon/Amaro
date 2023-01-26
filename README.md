@@ -1,8 +1,15 @@
-# Projeto: Criar uma API de cadastro de produtos.
+# Amaro
 
-- PHP 8.1
-- Laravel 9
-- Configuração de variáveis de ambiente ( Docker e postgres )
+Api para gestão de produtos
+
+| :placard: Vitrine.Dev |     |
+| -------------  | --- |
+| :sparkles: Nome        | **Amaro**
+| :label: Tecnologias | php 8.1, laravel 9, Docker, Postgres
+| :rocket: URL         | https://github.com/TKDmarllon/Amaro
+| :fire: Desafio     | https://github.com/CollabCodeTech/backend-challenges
+
+
 - CRUD trabalhando com camadas Controller, Service e Repository
 - Orientação por objetos
 - Validação de dados nas Requests
