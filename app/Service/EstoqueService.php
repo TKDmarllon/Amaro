@@ -26,7 +26,7 @@ class EstoqueService
         return new JsonResponse($estoque,Response::HTTP_OK);
     }
 
-    public function atualizarEstoque(Estoque $estoqueNovo,$id)
+    public function atualizarEstoque(Estoque $estoqueNovo,$id):void
     {
         $buscarEstoque=$this->estoqueRepository->consultarEstoque($id);
         $atualizarEstoque=$buscarEstoque[0];

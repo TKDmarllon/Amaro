@@ -14,7 +14,7 @@ class EstoqueController extends Controller
     public function __construct(protected EstoqueService $estoqueService)
     {}
 
-    public function criarEstoque(EstoqueRequest $request)
+    public function criarEstoque(EstoqueRequest $request):JsonResponse
     {
         try{
             $estoque = new Estoque($request->all());
@@ -30,7 +30,7 @@ class EstoqueController extends Controller
         return $this->estoqueService->enviaconsulta($id);
     }
 
-    public function AtualizarEstoque(EstoqueRequest $request, $id)
+    public function AtualizarEstoque(EstoqueRequest $request, $id):JsonResponse
     {
         try{
             $estoqueNovo = new Estoque($request->all());
@@ -41,7 +41,7 @@ class EstoqueController extends Controller
         }
     }
 
-    public function deletarEstoque(int $id)
+    public function deletarEstoque(int $id):JsonResponse
     {
         return $this->estoqueService->deletarEstoque($id);
     }
