@@ -1,4 +1,4 @@
-# Amaro
+# API back-end loja de moda
 
 Api para gestão de produtos
 
