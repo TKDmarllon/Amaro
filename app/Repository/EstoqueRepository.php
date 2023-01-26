@@ -17,12 +17,12 @@ class EstoqueRepository
         return Estoque::where('produtos_id',$id)->get();
     }
 
-    public function salvarAtualizado(mixed $atualizarEstoque)
+    public function salvarAtualizado(mixed $atualizarEstoque):void
     {
         Estoque::saved($atualizarEstoque);
     }
 
-    public function destruirEstoque(int $id)
+    public function destruirEstoque(int $id):void
     {
         Estoque::findorfail($id)->delete();
     }
