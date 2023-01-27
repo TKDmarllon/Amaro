@@ -19,7 +19,7 @@ class ProdutosController extends Controller
     {
         try {
             $protudo = new Produtos($request->all());
-            $criado = $this->produtosService->criarProduto($protudo);
+            $criado = $this->produtosService->enviaRepository($protudo);
                 return new JsonResponse("Produto $criado->nome criado com sku $criado->sku",
                                          Response::HTTP_CREATED);
         } catch(produtosException $e){
@@ -29,24 +29,24 @@ class ProdutosController extends Controller
     
     public function buscarProdutoId(int $id):Produtos
     {
-        return $this->produtosService->buscarProdutoId($id);
+        return $this->produtosService->enviaConsultaId($id);
     }
 
     public function buscarProdutoSku(int $sku):JsonResponse
     {
-        return $this->produtosService->buscarProdutoSku($sku);
+        return $this->produtosService->enviaConsultaSku($sku);
     }
 
     public function buscarProdutoNome(string $nome):JsonResponse
     {
-        return $this->produtosService->buscarProdutoNome($nome);
+        return $this->produtosService->enviaConsultaNome($nome);
     }
 
     public function atualizarProduto(AtualizacaoProdutosRequest $request,int $id):JsonResponse
     {
         try {
             $atualizacao=new Produtos($request->all());
-            return $this->produtosService->atualizarProduto($atualizacao,$id);
+            return $this->produtosService->enviarAtualizacao($atualizacao,$id);
         } catch(produtosException $e){
             return new JsonResponse($e->getMessage(),$e->getCode());
         }
@@ -54,6 +54,6 @@ class ProdutosController extends Controller
 
     public function deletarProduto(int $id):JsonResponse
     {
-        return $this->produtosService->deletarProduto($id);
+        return $this->produtosService->EnviarExclusao($id);
     }
 }
