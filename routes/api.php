@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\EstoqueController;
 use App\Http\Controllers\ProdutosController;
+use App\Http\Controllers\UsersController;
 use App\Mail\NovoProduto;
 use Illuminate\Support\Facades\Route;
 
@@ -51,6 +52,22 @@ Route::controller(EstoqueController::class)->group(function()
 
     Route::delete("/estoque/id/{id}","deletarEstoque")
     ->name('deletar.estoque');
+});
+
+Route::controller(UsersController::class)->group(function()
+{    
+    Route::post("/usuario/cadastro","criarUsuario")
+    ->name('criar.usuario');
+
+    Route::get("/usuario/id/{id}","buscarUsuario")
+    ->name('buscar.usuario');
+
+    Route::put("/usuario/atualizacao/{id}","atualizarUsuario")
+    ->name('atualizar.usuario');
+
+    Route::delete("/usuario/id/{id}","deletarUsuario")
+    ->name('deletar.usuario');
+
 });
 
 Route::get('/email', function(){
