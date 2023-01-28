@@ -25,40 +25,40 @@ class ProdutosService
         return $numero;
     }
 
-    public function enviaRepository(Produtos $produto):Produtos
+    public function criarProduto(Produtos $produto):Produtos
     {
         $produto->sku=$this->gerarSku();
-        $produtoCriado=$this->produtosRepository->salvaProduto($produto);
+        $produtoCriado=$this->produtosRepository->criarProduto($produto);
         ProdutoCriado::dispatch($produtoCriado);
         return $produtoCriado;
     }
 
-    public function enviaConsultaId(int $id):Produtos
+    public function buscarProdutoId(int $id):Produtos
     {
-        return $this->produtosRepository->consultaId($id);
+        return $this->produtosRepository->buscarProdutoId($id);
     }
 
-    public function enviaConsultaSku(int $sku):JsonResponse
+    public function buscarProdutoSku(int $sku):JsonResponse
     {
-        $skuBuscado=$this->produtosRepository->consultaSku($sku);
+        $skuBuscado=$this->produtosRepository->buscarProdutoSku($sku);
         if ($skuBuscado->isEmpty()){
             return new JsonResponse($skuBuscado,Response::HTTP_NOT_FOUND);
         };
         return new JsonResponse($skuBuscado,Response::HTTP_OK);
     }
     
-    public function enviaConsultaNome(string $nome):JsonResponse
+    public function buscarProdutoNome(string $nome):JsonResponse
     {
-        $nomeBuscado = $this->produtosRepository->consultaNome($nome);
+        $nomeBuscado = $this->produtosRepository->buscarProdutoNome($nome);
         if ($nomeBuscado->isEmpty()) {
             return new JsonResponse($nomeBuscado,Response::HTTP_NOT_FOUND);
         }
         return new JsonResponse($nomeBuscado,Response::HTTP_OK);
     }
 
-    public function enviarAtualizacao(mixed $atualizacao,int $id):JsonResponse
+    public function atualizarProduto(mixed $atualizacao,int $id):JsonResponse
     {
-        $produto = $this->produtosRepository->ConsultaId($id);
+        $produto = $this->produtosRepository->buscarProdutoId($id);
 
         if (is_null($produto)) {
         return new JsonResponse("Produto não encontrado.",Response::HTTP_NOT_FOUND);
@@ -70,18 +70,18 @@ class ProdutosService
                 'genero'=>$atualizacao->genero
                 ]);
 
-        $this->produtosRepository->salvarAtualizacao($produto);
+        $this->produtosRepository->atualizarProduto($produto);
         return new JsonResponse("Produto atualizado.",Response::HTTP_ACCEPTED);
     }
     
-    public function enviarExclusao(int $id):JsonResponse
+    public function deletarProduto(int $id):JsonResponse
     {
-        $exclusao=$this->produtosRepository->consultaId($id);
+        $exclusao=$this->produtosRepository->buscarProdutoId($id);
 
         if (is_null($exclusao)) {
             return new JsonResponse("Produto não encontrado.",Response::HTTP_NOT_FOUND);
         }
-            $this->produtosRepository->deletarId($id);
+            $this->produtosRepository->deletarProduto($id);
             return new JsonResponse("Produto excluído.",Response::HTTP_OK);
     }
 }
