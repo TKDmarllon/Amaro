@@ -8,17 +8,17 @@ class UsersRepository
 {
     public function criarUsuario(User $dadosUsuario)
     {
-        User::created($dadosUsuario);
+        return User::created($dadosUsuario);
     }
 
     public function buscarUsuarioId(int $id)
     {
-        User::findOrFail($id);
+        return User::findOrFail($id);
     }
 
     public function atualizarUsuario(User $usuario)
     {
-        User::saved($usuario);
+        return User::saved($usuario);
     }
 
     public function deletarUsuario(int $id)
