@@ -3,12 +3,13 @@
 namespace App\Service;
 
 use App\Models\User;
+use App\Repository\UsersRepository;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
 
 class UsersService
 {
-    public function __construct(protected $usersRepository)
+    public function __construct(protected UsersRepository $usersRepository)
     {
     }
 
@@ -24,7 +25,7 @@ class UsersService
 
     public function atualizarUsuario($dados, $id)
     {
-        $usuario = $this->usersRepository->ConsultaId($id);
+        $usuario = $this->usersRepository->buscarUsuarioId($id);
 
         if (is_null($dados)) {
         return new JsonResponse("Produto não encontrado.",Response::HTTP_NOT_FOUND);
