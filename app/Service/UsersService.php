@@ -12,17 +12,17 @@ class UsersService
     {
     }
 
-    public function enviarCadastro(User $novoUsuario)
+    public function criarUsuario(User $novoUsuario)
     {
-        return $this->usersRepository->salvarUsuario($novoUsuario);
+        return $this->usersRepository->criarUsuario($novoUsuario);
     }
 
-    public function enviarBusca(int $id)
+    public function buscarUsuarioId(int $id)
     {
-        return $this->usersRepository->consultaId($id);
+        return $this->usersRepository->buscarUsuarioId($id);
     }
 
-    public function enviarNovosDados($dados, $id)
+    public function atualizarUsuario($dados, $id)
     {
         $usuario = $this->usersRepository->ConsultaId($id);
 
@@ -34,12 +34,12 @@ class UsersService
                 'valor'=>$dados->password, 
                 ]);
 
-        $this->usersRepository->salvarAtualizacao($usuario);
+        $this->usersRepository->atualizarUsuario($usuario);
         return new JsonResponse("Produto atualizado.",Response::HTTP_ACCEPTED);
     }
 
-    public function enviarExclusao(int $id)
+    public function deletarUsuario(int $id)
     {
-        return $this->usersRepository->destruirId($id);
+        return $this->usersRepository->deletarUsuario($id);
     }
 }

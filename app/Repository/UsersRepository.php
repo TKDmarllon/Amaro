@@ -6,22 +6,22 @@ use App\Models\User;
 
 class UsersRepository
 {
-    public function salvarUsuario(User $dadosUsuario)
+    public function criarUsuario(User $dadosUsuario)
     {
         User::created($dadosUsuario);
     }
 
-    public function consultaId(int $id)
+    public function buscarUsuarioId(int $id)
     {
         User::findOrFail($id);
     }
 
-    public function salvarAtualizacao(User $usuario)
+    public function atualizarUsuario(User $usuario)
     {
         User::saved($usuario);
     }
 
-    public function destruirId(int $id)
+    public function deletarUsuario(int $id)
     {
         User::destroy($id);
     }
