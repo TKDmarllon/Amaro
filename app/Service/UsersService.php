@@ -28,15 +28,15 @@ class UsersService
         $usuario = $this->usersRepository->buscarUsuarioId($id);
 
         if (is_null($dados)) {
-        return new JsonResponse("Produto não encontrado.",Response::HTTP_NOT_FOUND);
+        return new JsonResponse("Usuario não encontrado.",Response::HTTP_NOT_FOUND);
         }
         $usuario->update([
                 'nome'=>$dados->nome,
-                'valor'=>$dados->password, 
+                'password'=>$dados->password, 
                 ]);
 
         $this->usersRepository->atualizarUsuario($usuario);
-        return new JsonResponse("Produto atualizado.",Response::HTTP_ACCEPTED);
+        return new JsonResponse("Usuario atualizado.",Response::HTTP_ACCEPTED);
     }
 
     public function deletarUsuario(int $id)
