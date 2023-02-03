@@ -6,9 +6,9 @@ use App\Models\User;
 
 class UsersRepository
 {
-    public function criarUsuario(User $dadosUsuario)
+    public function criarUsuario($dadosUsuario)
     {
-        return User::created($dadosUsuario);
+        return User::create($dadosUsuario->getAttributes());
     }
 
     public function buscarUsuarioId(int $id)

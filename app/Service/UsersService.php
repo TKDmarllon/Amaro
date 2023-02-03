@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Repository\UsersRepository;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Hash;
 
 class UsersService
 {
@@ -15,6 +16,7 @@ class UsersService
 
     public function criarUsuario(User $novoUsuario)
     {
+        $novoUsuario->password = Hash::make($novoUsuario->password);
         return $this->usersRepository->criarUsuario($novoUsuario);
     }
 
