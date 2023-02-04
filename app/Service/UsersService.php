@@ -34,15 +34,21 @@ class UsersService
         }
         $usuario->update([
                 'nome'=>$dados->nome,
-                'password'=>$dados->password, 
+                'password'=> Hash::make($dados->password), 
                 ]);
 
         $this->usersRepository->atualizarUsuario($usuario);
         return new JsonResponse("Usuario atualizado.",Response::HTTP_ACCEPTED);
     }
 
-    public function deletarUsuario(int $id)
+    public function deletarUsuario(int $id):JsonResponse
     {
-        return $this->usersRepository->deletarUsuario($id);
+        $exclusao=$this->usersRepository->buscarUsuarioId($id);
+
+        if (is_null($exclusao)) {
+            return new JsonResponse("Usuário não encontrado.",Response::HTTP_NOT_FOUND);
+        }
+            $this->usersRepository->deletarUsuario($id);
+            return new JsonResponse("Usuário excluído.",Response::HTTP_OK);
     }
 }

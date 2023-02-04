@@ -62,7 +62,7 @@ class EstoqueTest extends TestCase
         $response->assertStatus(200);
     }
 
-    public function test_bsucaEstoqueIdErroInexistente()
+    public function test_buscarEstoqueIdErroInexistente()
     {
         $response = $this->get(route('buscar.estoqueId','0'));
         $response->assertStatus(404);

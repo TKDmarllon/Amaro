@@ -6,7 +6,7 @@ use App\Models\User;
 
 class UsersRepository
 {
-    public function criarUsuario($dadosUsuario)
+    public function criarUsuario(User $dadosUsuario)
     {
         return User::create($dadosUsuario->getAttributes());
     }

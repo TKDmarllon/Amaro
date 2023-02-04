@@ -60,7 +60,7 @@ Route::controller(UsersController::class)->group(function()
     ->name('criar.usuario');
 
     Route::get("/usuario/id/{id}","buscarUsuarioID")
-    ->name('buscar.usuario');
+    ->name('buscar.usuarioId');
 
     Route::put("/usuario/atualizacao/{id}","atualizarUsuario")
     ->name('atualizar.usuario');

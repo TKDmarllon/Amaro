@@ -74,5 +74,30 @@ class TabelasSeeder extends Seeder
             "g"=>'5',
             "gg"=>'4'
         ]);
+
+        DB::table('users')->insert([
+            "nome"=>"seed 1",
+            "email"=>'seed1@teste.com',
+	        "password"=>"123456Ab",
+        ]);
+
+        DB::table('users')->insert([
+            "nome"=>"seed 2",
+            "email"=>'seed2@teste.com',
+	        "password"=>"123456Ab",
+        ]);
+
+        DB::table('users')->insert([
+            "nome"=>"seed 3",
+            "email"=>'seed3@teste.com',
+	        "password"=>"123456Ab",
+        ]);
+
+        DB::table('users')->insert([
+            "nome"=>"seed 4",
+            "email"=>'seed4@teste.com',
+	        "password"=>"123456Ab",
+        ]);
+
     }
 }

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Exceptions\UsersException;
+use App\Http\Requests\AtualizacaoUserRequest;
+use App\Http\Requests\UserRequest;
 use App\Models\User;
 use App\Service\UsersService;
 use Illuminate\Http\JsonResponse;
@@ -11,15 +13,15 @@ use Illuminate\Http\Response;
 
 class UsersController extends Controller
 {
-    public function __construct(protected UsersService $usersService)
+    public function __construct(private UsersService $usersService)
     {
     }
 
-    public function criarUsuario(Request $request):JsonResponse
+    public function criarUsuario(UserRequest $request):JsonResponse
     {
         try {
-            $usuario=new User($request->all());
-            $this->usersService->criarUsuario($usuario);
+            $user=new User($request->all());
+            $this->usersService->criarUsuario($user);
             return new JsonResponse("Usuario Criado!",Response::HTTP_CREATED);
         } catch (UsersException $e) {
             return new JsonResponse($e->getMessage(),$e->getCode());
@@ -31,7 +33,7 @@ class UsersController extends Controller
         return $this->usersService->buscarUsuarioId($id);
     }
 
-    public function atualizarUsuario(Request $request,int $id)
+    public function atualizarUsuario(AtualizacaoUserRequest $request,int $id)
     {
         try {
             $this->usersService->atualizarUsuario(new User($request->all()),$id);
