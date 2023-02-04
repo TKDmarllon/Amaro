@@ -94,13 +94,13 @@ class ProdutosTest extends TestCase
         $response->assertStatus(400);
     }
 
-    public function test_bucarProduto()
+    public function test_buscarProduto()
     {
         $response = $this->get(route('buscar.produtoId',3));
         $response->assertStatus(200);
     }
 
-    public function test_bucarProdutoErroIdInexistente()
+    public function test_buscarProdutoErroIdInexistente()
     {
         $response = $this->get(route('buscar.produtoId',0));
         $response->assertStatus(404);

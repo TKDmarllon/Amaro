@@ -8,7 +8,7 @@ class UsersRepository
 {
     public function criarUsuario(User $dadosUsuario)
     {
-        return User::created($dadosUsuario);
+        return User::create($dadosUsuario->getAttributes());
     }
 
     public function buscarUsuarioId(int $id)

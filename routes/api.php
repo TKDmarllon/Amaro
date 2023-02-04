@@ -59,8 +59,8 @@ Route::controller(UsersController::class)->group(function()
     Route::post("/usuario/cadastro","criarUsuario")
     ->name('criar.usuario');
 
-    Route::get("/usuario/id/{id}","buscarUsuario")
-    ->name('buscar.usuario');
+    Route::get("/usuario/id/{id}","buscarUsuarioID")
+    ->name('buscar.usuarioId');
 
     Route::put("/usuario/atualizacao/{id}","atualizarUsuario")
     ->name('atualizar.usuario');
