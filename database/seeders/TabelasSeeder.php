@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class TabelasSeeder extends Seeder
 {
@@ -76,27 +77,35 @@ class TabelasSeeder extends Seeder
         ]);
 
         DB::table('users')->insert([
-            "nome"=>"seed 1",
-            "email"=>'seed1@teste.com',
-	        "password"=>"123456Ab",
+            "nome"=>"ClienteAdmin",
+            "email"=>'ClienteAdmin@teste.com',
+            "cliente"=>'1',
+            "admin"=>'1',
+	        "password"=>Hash::make("123456Ab"),
         ]);
 
         DB::table('users')->insert([
-            "nome"=>"seed 2",
-            "email"=>'seed2@teste.com',
-	        "password"=>"123456Ab",
+            "nome"=>"Cliente",
+            "email"=>'Cliente@teste.com',
+            "cliente"=>'1',
+            "admin"=>'0',
+	        "password"=>Hash::make("123456Ab"),
         ]);
 
         DB::table('users')->insert([
-            "nome"=>"seed 3",
-            "email"=>'seed3@teste.com',
-	        "password"=>"123456Ab",
+            "nome"=>"Admin",
+            "email"=>'Admin@teste.com',
+            "cliente"=>'0',
+            "admin"=>'1',
+	        "password"=>Hash::make("123456Ab"),
         ]);
 
         DB::table('users')->insert([
-            "nome"=>"seed 4",
-            "email"=>'seed4@teste.com',
-	        "password"=>"123456Ab",
+            "nome"=>"NemClienteNemAdmin",
+            "email"=>'NemClienteNemAdmin@teste.com',
+            "cliente"=>'0',
+            "admin"=>'0',
+	        "password"=>Hash::make("123456Ab"),
         ]);
 
     }
